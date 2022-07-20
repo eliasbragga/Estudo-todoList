@@ -1,18 +1,11 @@
 <template>
   <div>
      <v-col cols="auto">
-      <v-dialog
+      <v-dialog v-model="dialog"
         transition="dialog-top-transition"
         max-width="600"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="primary"
-            v-bind="attrs"
-            v-on="on"
-          ></v-btn>
-        </template>
-        <template v-slot:default="dialog">
+      >        
+        <template>
           <v-card>
             <v-toolbar
               color="primary"
@@ -24,8 +17,13 @@
             <v-card-actions class="justify-end">
               <v-btn
                 text
-                @click="dialog.value = false"
-              >Close</v-btn>
+                @click="$emit('fecharAlerta')"
+              >Cancelar</v-btn>
+              <v-btn
+                text
+                @click="$emit('clearList')"
+                depressed color="error"
+              >Excluir</v-btn>
             </v-card-actions>
           </v-card>
         </template>
@@ -37,10 +35,17 @@
 <script>
 export default {
     name:"DialogComponente",
+    emits:["fecharAlerta","clearList"],
     data(){
         return {
-            dialog:false
+            
         }
+    },
+    props:{
+      dialog:Boolean
+    },
+    methods:{
+      
     }
 }
 </script>

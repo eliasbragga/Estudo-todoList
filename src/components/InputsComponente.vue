@@ -13,7 +13,7 @@
         
       </ul>
     </div>
-  <DialogComponente/>
+  <DialogComponente :dialog="dialog" @fecharAlerta="fecharAlerta" @clearList="clearList"/>
   </div>
 </template>
 
@@ -23,10 +23,12 @@ export default {
   name: "InputsComponente",
   emits: [],
   props: {
+   
     nomeList:String
   },
   data() {
     return {
+      dialog:false,
      itemList:"",
      itensList:[]
     };
@@ -43,7 +45,15 @@ export default {
       this.itensList.splice(index,1)
     } ,
     deleteList(){
-      this.itensList = []
+      this.dialog = true
+      
+    },
+    fecharAlerta(){
+      this.dialog = false
+    },
+    clearList(){
+      this.dialog = false
+      this.itensList =[]
     }
     
   },
